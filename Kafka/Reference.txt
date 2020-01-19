@@ -1,0 +1,4 @@
+##  https://stackoverflow.com/questions/40872520/whats-the-purpose-of-kafkas-key-value-pair-based-messaging
+##  http://cloudurable.com/blog/kafka-tutorial-kafka-producer/index.html
+##  https://dzone.com/articles/writing-a-kafka-consumer-in-java
+##  https://www.youtube.com/watch?v=VbSRS7kG5Cw&t=384s
