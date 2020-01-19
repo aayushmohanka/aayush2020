@@ -6,7 +6,7 @@ import producer.KafkaProducerExample;
 public class RunApplication{
 
 	public static void main(String[] args) {
-		
+		//Creating 2 thread to start both producer and consumer at a time.
 		KafkaConsumerExample kce = new KafkaConsumerExample();
 		Thread t1 = new Thread(kce);
 		KafkaProducerExample kpe = new KafkaProducerExample();

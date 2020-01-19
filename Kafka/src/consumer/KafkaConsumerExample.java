@@ -18,7 +18,7 @@ public class KafkaConsumerExample  implements Runnable {
 	
 	public static void bootStrapConsumer() throws Exception {
 		
-		while (KafkaProducerExample.flag)
+		while (KafkaProducerExample.flag)//based on flag of producer
 		{
 	      runConsumer();
 		}
@@ -51,13 +51,12 @@ public class KafkaConsumerExample  implements Runnable {
 	 
 	
 	static void runConsumer() throws InterruptedException {
-        final Consumer<Long, String> consumer = createConsumer();
+        final Consumer<Long, String> consumer = createConsumer();//create consumer object with needed property
         
         final int giveUp = 5;   int noRecordsCount = 0;
         while (true) {
         	
-            final ConsumerRecords<Long, String> consumerRecords =
-                    consumer.poll(1000);
+            final ConsumerRecords<Long, String> consumerRecords = consumer.poll(1000);//get data from topic of broker/server
             if (consumerRecords.count()==0) {
                 noRecordsCount++;
                 if (noRecordsCount > giveUp) 
@@ -74,7 +73,7 @@ public class KafkaConsumerExample  implements Runnable {
                         record.key(), record.value(),
                         record.partition(), record.offset());
             });
-            consumer.commitAsync();
+            consumer.commitAsync();//commit helps to increase offset value so that next time consumer do not print same value
         }
         consumer.close();
         
@@ -83,7 +82,7 @@ public class KafkaConsumerExample  implements Runnable {
 	@Override
 	public void run() {
 		try {
-			KafkaConsumerExample.bootStrapConsumer();
+			KafkaConsumerExample.bootStrapConsumer();//just for starting call
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

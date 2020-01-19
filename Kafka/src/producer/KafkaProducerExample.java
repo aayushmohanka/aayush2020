@@ -11,7 +11,7 @@ public class KafkaProducerExample implements Runnable {
 	public static boolean flag = true;
 	public static void bootStrap() throws Exception 
 	{
-		flag= true;
+		flag= true;//flag is also used in consumer to check and stop thread
 		Scanner s = new Scanner(System.in);
 		System.out.println("How many messages do you want to produce");
 		int number = s.nextInt();
@@ -21,7 +21,7 @@ public class KafkaProducerExample implements Runnable {
 		Long key = s.nextLong();
 		System.out.println("Enter value");
 		String value = s.next();
-		runProducer(number,key,value);
+		runProducer(number,key,value);//method where flow starts
 		}
 		while(flag==true)
 		{
@@ -41,8 +41,8 @@ public class KafkaProducerExample implements Runnable {
 	}
 
 
-	private final static String TOPIC = "Topic1";
-	private final static String BOOTSTRAP_SERVERS = "localhost:9092";
+	private final static String TOPIC = "Topic1";//topic created with this name
+	private final static String BOOTSTRAP_SERVERS = "localhost:9092";//broker /server 
 
 	private static Producer<Long, String> createProducer() {
 		Properties props = new Properties();
@@ -58,14 +58,14 @@ public class KafkaProducerExample implements Runnable {
 
 
 	static void runProducer(int number,Long key,String value) throws Exception {
-		final Producer<Long, String> producer = createProducer();
+		final Producer<Long, String> producer = createProducer();//Create producer object by passing all needed configs.
 
 		try {
 
 			final ProducerRecord<Long,String> record =
-					new ProducerRecord<>(TOPIC,0,key,value);
+					new ProducerRecord<>(TOPIC,0,key,value);//Many constructor available ,check source code.
 
-			RecordMetadata metadata = producer.send(record).get();
+			RecordMetadata metadata = producer.send(record).get();//send records to topic of broker with partition no 1
 			/*
 			 * System.out.println("recordKey-"+record.key()+"RecordValue -"+
 			 * record.value()+"MetaData Partition-"+metadata.partition() +"offset -"+
@@ -84,6 +84,7 @@ public class KafkaProducerExample implements Runnable {
 	@Override
 	public void run() {
 		try {
+			//bootStrap of this class will start producer
 			KafkaProducerExample.bootStrap();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
