@@ -68,7 +68,7 @@ public class KafkaConsumerExample  implements Runnable {
                 else continue;
             }
             
-            System.out.println("Hey!! seems some record got produced");
+            System.out.println("Hey!! seems some record got produced by your producer");
             consumerRecords.forEach(record -> {
                 System.out.printf("Consumer Record:(%d, %s, %d, %d)\n",
                         record.key(), record.value(),
